@@ -11,39 +11,52 @@ let playRound = (playerSelection, computerSelection) => {
     if (playerSelection == "rock") {
         switch (computerSelection) {
             case "rock":
-                playRound(playerSelection.toLowerCase(), getComputerChoice());
+                return "Tie";
                 break;
             case "paper":
-                return "Paper beats rock. You lose.";
+                return "Lose";
                 break;
             case "scissors":
-                return "Rock beats scissors. You win.";
+                return "Win";
         }
     }
     else if (playerSelection == "paper") {
         switch (computerSelection) {
             case "rock":
-                return "Paper beats rock. You win.";
+                return "Win";
                 break;
             case "paper":
-                playRound(playerSelection.toLowerCase(), getComputerChoice());
+                return "Tie";
                 break;
             case "scissors":
-                return "Scissor beats paper. You lose.";
+                return "Lose";
         }   
     } 
     switch (computerSelection) {
         case "rock":
-            return "Rock beats scissors. You lose.";
+            return "Win";
             break;
         case "paper":
-            return "Scissors beats paper. You win.";
+            return "Lose";
             break;
         case "scissors":
-            playRound(playerSelection.toLowerCase(), getComputerChoice());
+            return "Tie";
     } 
 }  
 
 const playerChoice = "rock";
 
-console.log(playRound(playerChoice.toLowerCase(), getComputerChoice()));
+let game = () => {
+    let score = 0;
+    for (let i = 0; i < 5; i++) {
+        let roundResult = playRound(playerChoice.toLowerCase(), getComputerChoice())
+        if (roundResult == "Win") {
+            score++;
+        } else if (roundResult == "Tie") {
+            i--;
+        }
+    }
+    console.log(`You won ${score} of 5 rounds.`)
+}
+
+game();
