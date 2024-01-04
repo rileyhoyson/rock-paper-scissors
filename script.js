@@ -11,7 +11,7 @@ let playRound = (playerSelection, computerSelection) => {
     if (playerSelection == "rock") {
         switch (computerSelection) {
             case "rock":
-                return "Tie.";
+                playRound(playerSelection.toLowerCase(), getComputerChoice());
                 break;
             case "paper":
                 return "Paper beats rock. You lose.";
@@ -26,7 +26,7 @@ let playRound = (playerSelection, computerSelection) => {
                 return "Paper beats rock. You win.";
                 break;
             case "paper":
-                return "Tie.";
+                playRound(playerSelection.toLowerCase(), getComputerChoice());
                 break;
             case "scissors":
                 return "Scissor beats paper. You lose.";
@@ -40,7 +40,7 @@ let playRound = (playerSelection, computerSelection) => {
             return "Scissors beats paper. You win.";
             break;
         case "scissors":
-            return "Tie.";
+            playRound(playerSelection.toLowerCase(), getComputerChoice());
     } 
 }  
 
