@@ -8,8 +8,10 @@ const getComputerChoice = () => {
   return "scissors";
 };
 
-const getPlayerChoice = () => {
-  return prompt("Rock, paper or scissors?").toLowerCase();
+const getPlayerChoice = (roundsPlayed) => {
+    if (roundsPlayed < 4) {
+    return prompt("Rock, paper or scissors?").toLowerCase();
+    }
 };
 
 const playRound = (playerSelection, computerSelection) => {
@@ -80,17 +82,17 @@ const printRoundResult = (playerSelection, playRoundResult) => {
 
 let game = () => {
   let score = 0;
-  let playerChoice = getPlayerChoice();
+  let playerChoice = getPlayerChoice(0);
   for (let i = 0; i < 5; i++) {
     let roundResult = playRound(playerChoice, getComputerChoice());
     printRoundResult(playerChoice, roundResult);
     switch (roundResult) {
       case "Win":
         score++;
-        playerChoice = getPlayerChoice(); // If the round is won we need the 
+        playerChoice = getPlayerChoice(i); // If the round is won we need the 
         break;                            // player to choose again for the next round.
       case "Lose":
-        playerChoice = getPlayerChoice(); // Same with if the round is lost.
+        playerChoice = getPlayerChoice(i); // Same with if the round is lost.
         break;
       case "Tie": // If the round is a tie, we don't ask the user to choose 
         i--;      // again because we replay the round with the same playerChoice
