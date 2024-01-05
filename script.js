@@ -8,6 +8,10 @@ const getComputerChoice = () => {
   return "scissors";
 };
 
+const getPlayerChoice = () => {
+  return prompt("Rock, paper or scissors?").toLowerCase();
+};
+
 const playRound = (playerSelection, computerSelection) => {
   if (playerSelection == "rock") {
     switch (computerSelection) {
@@ -59,39 +63,45 @@ const printRoundResult = (playerSelection, playRoundResult) => {
     }
   } else if (playRoundResult == "Lose") {
     switch (playerSelection) {
-        case "rock":
-          result = "Paper beats rock. You lose.";
-          break;
-        case "paper":
-          result = "Scissor beats paper. You lose.";
-          break;
-        case "scissors":
-          result = "Rock beats scissors. You lose.";
-  }
+      case "rock":
+        result = "Paper beats rock. You lose.";
+        break;
+      case "paper":
+        result = "Scissor beats paper. You lose.";
+        break;
+      case "scissors":
+        result = "Rock beats scissors. You lose.";
+    }
   } else {
     return;
   }
   console.log(result);
 };
 
-const playerChoice = "rock";
-
 let game = () => {
   let score = 0;
+  let playerChoice = getPlayerChoice(); // Get initial player choice
   for (let i = 0; i < 5; i++) {
-    let roundResult = playRound(playerChoice.toLowerCase(), getComputerChoice());
+    let roundResult = playRound(playerChoice, getComputerChoice());
     printRoundResult(playerChoice, roundResult);
-    if (roundResult == "Win") {
-      score++;
-    } else if (roundResult == "Tie") {
-      i--;
+    switch (roundResult) {
+      case "Win":
+        score++;
+        playerChoice = getPlayerChoice(); // If the round is won we need the player to choose again for the next round.
+        break;
+      case "Lose":
+        playerChoice = getPlayerChoice(); // Same with if the round is lost.
+        break;
+      case "Tie": // If the round is a tie, we don't ask the user to choose again because we replay the round with the
+        i--;      // same playerChoice until we get a winner.
+        break;
     }
   }
-  printGameResult(score)
+  printGameResult(score);
 };
 
-const printGameResult = score => {
-    console.log(`You won ${score} of 5 rounds.`);
-}
+const printGameResult = (score) => {
+  console.log(`You won ${score} of 5 rounds.`);
+};
 
 game();
