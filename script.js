@@ -80,21 +80,21 @@ const printRoundResult = (playerSelection, playRoundResult) => {
 
 let game = () => {
   let score = 0;
-  let playerChoice = getPlayerChoice(); // Get initial player choice
+  let playerChoice = getPlayerChoice();
   for (let i = 0; i < 5; i++) {
     let roundResult = playRound(playerChoice, getComputerChoice());
     printRoundResult(playerChoice, roundResult);
     switch (roundResult) {
       case "Win":
         score++;
-        playerChoice = getPlayerChoice(); // If the round is won we need the player to choose again for the next round.
-        break;
+        playerChoice = getPlayerChoice(); // If the round is won we need the 
+        break;                            // player to choose again for the next round.
       case "Lose":
         playerChoice = getPlayerChoice(); // Same with if the round is lost.
         break;
-      case "Tie": // If the round is a tie, we don't ask the user to choose again because we replay the round with the
-        i--;      // same playerChoice until we get a winner.
-        break;
+      case "Tie": // If the round is a tie, we don't ask the user to choose 
+        i--;      // again because we replay the round with the same playerChoice
+        break;    // until we get a winner.
     }
   }
   printGameResult(score);
