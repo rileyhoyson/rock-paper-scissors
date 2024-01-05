@@ -1,4 +1,4 @@
-let getComputerChoice = () => {
+const getComputerChoice = () => {
   let randomNumber = Math.floor(Math.random() * 3);
   if (randomNumber === 0) {
     return "rock";
@@ -8,7 +8,7 @@ let getComputerChoice = () => {
   return "scissors";
 };
 
-let playRound = (playerSelection, computerSelection) => {
+const playRound = (playerSelection, computerSelection) => {
   if (playerSelection == "rock") {
     switch (computerSelection) {
       case "rock":
@@ -87,7 +87,11 @@ let game = () => {
       i--;
     }
   }
-  console.log(`You won ${score} of 5 rounds.`);
+  printGameResult(score)
 };
+
+const printGameResult = score => {
+    console.log(`You won ${score} of 5 rounds.`);
+}
 
 game();
