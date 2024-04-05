@@ -9,9 +9,9 @@ const getComputerChoice = () => {
 };
 
 const getPlayerChoice = (roundsPlayed) => {
-    if (roundsPlayed < 4) {
+  if (roundsPlayed < 4) {
     return prompt("Rock, paper or scissors?").toLowerCase();
-    }
+  }
 };
 
 const playRound = (playerSelection, computerSelection) => {
@@ -62,6 +62,7 @@ const printRoundResult = (playerSelection, playRoundResult) => {
         break;
       case "scissors":
         result = "Scissors beats paper. You win.";
+        break;
     }
   } else if (playRoundResult == "Lose") {
     switch (playerSelection) {
@@ -73,9 +74,10 @@ const printRoundResult = (playerSelection, playRoundResult) => {
         break;
       case "scissors":
         result = "Rock beats scissors. You lose.";
+        break;
     }
   } else {
-    return;
+    result = "Tie! Choose again.";
   }
   console.log(result);
 };
@@ -89,14 +91,15 @@ let game = () => {
     switch (roundResult) {
       case "Win":
         score++;
-        playerChoice = getPlayerChoice(i); // If the round is won we need the 
-        break;                            // player to choose again for the next round.
+        playerChoice = getPlayerChoice(i); // If the round is won we need the
+        break; // player to choose again for the next round.
       case "Lose":
         playerChoice = getPlayerChoice(i); // Same with if the round is lost.
         break;
-      case "Tie": // If the round is a tie, we don't ask the user to choose 
-        i--;      // again because we replay the round with the same playerChoice
-        break;    // until we get a winner.
+      case "Tie":
+        i--; // If the round is a tie we do not count the round
+        playerChoice = getPlayerChoice(i);
+        break;
     }
   }
   printGameResult(score);
